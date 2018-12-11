@@ -1,0 +1,100 @@
+testExistPrinter<view class="container">
+  <view class="printer-info">
+    <text class='printer-info-title'>打印机的基本信息</text>
+    <button bindtap='toEditPrinter' type='primary' class='edit-btn'>编辑</button>          
+  </view>
+  <scroll-view scroll-y='true' class="content-space">
+    <form bindsubmit="formSubmit" bindreset="formReset" data-id="addPrinterForm" class="printer-form">
+    <!--注意此处的data-id="addFoodForm" class="food-form是否有用，无用删掉-->
+      <view class="printer-img" bindtap="showImg" >
+        <view class='printerImg'>
+          <image class="printer" src="/imgs/printer/printer.jpg" background-size="cover" mode="aspecFill"></image>
+        </view>
+       </view>
+       <view wx:if="{{owner.is_print==1}}">  
+        <!--view class="section showpar">
+          <view class="section__title">打印机名称：</view>
+          <input bindinput="bindKeyInput" bindreset="formReset" maxlength="10" placeholder="" focus="{{focus}}" value="{{owner.s_storename}}" name="sname" disabled="{{waitEdit}}" />
+        </view-->
+
+        <view class="section showpar">
+          <view class="section__title">打印机终端号: </view>
+          <input bindinput="bindKeyInput" bindreset="formReset" style="width:300rpx" type="digit" maxlength="10" placeholder="" value="{{owner.printername}}" name="printername" disabled="{{waitEdit}}" />
+        </view>
+        <view class="section showpar">
+        <view class="section__title">打印机秘钥:  </view>
+        <input bindinput="bindKeyInput"  style="width:300rpx" type="{{show}}" maxlength="12"  placeholder=""     value="{{owner.printerpsd}}" password='{{isShowPassword}}' name="printerpsd" disabled="{{waitEdit}}"  />
+
+           <!-- <image class='showImg' bindtap='showPassword' src="{{isShow ? '/imgs/printer/no_show.png' : '/imgs/printer/show2.png'}}"></image> -->
+
+           <view  bindtap='toggleShowPassword'>
+        <image class='showImg' src='/imgs/printer/no_show.png' wx:if='{{isShowPassword}}'/>
+        <image class='showImg' src='/imgs/printer/show2.png' wx:if='{{!isShowPassword}}'/>
+         </view>
+
+      <!-- <view class="no_show-img"  >
+        <view class='noshowImg'>
+          <image class="no_show" src="/imgs/printer/no_show.png" background-size="cover" mode="aspecFill"></image>
+        </view>
+      </view> -->
+        </view>
+        <!-- <view>
+          <button bindtap='toTestPrinter' type='primary' class='Test-btn'>测试</button>   
+        </view> -->
+        <!-- <view class="btn-area1 flex-row space-around {{waitEdit==true?'show':'hide'}}">
+           <button formType="submit" type="primary" >测试</button>
+        </view> -->
+        <!--绑定打印机的话显示测试按钮-->
+        <view class="{{mesEdit==false?'hide':'show'}}">
+          <button bindtap="testPrinter" type="primary" class="btn-area1">测试</button>
+        </view>
+        
+      </view>
+
+      <view wx:if="{{owner.is_print==0}}">  
+      <view class="{{mesEdit==false?'hide':'show'}}">您尚未添加打印机,请点击编辑按钮添加</view>
+        <!--view class="section showpar">
+          <view class="section__title">打印机名称：</view>
+          <input bindinput="bindKeyInput" bindreset="formReset" maxlength="10" placeholder="" focus="{{focus}}" value="{{owner.s_storename}}" name="sname" disabled="{{waitEdit}}" />
+        </view-->
+
+
+        <view class="section showpar {{waitEdit==false?'show':'hide'}}" >
+          <view class="section__title">打印机终端号: </view>
+          <input bindinput="bindKeyInput" bindreset="formReset" style="width:300rpx" type="digit" maxlength="10" placeholder="" value="{{owner.printername}}" name="printername" disabled="{{waitEdit}}" />
+        </view>
+        <view class="section showpar {{waitEdit==false?'show':'hide'}}">
+          <view class="section__title">打印机秘钥:  </view>
+          
+           <!-- <input bindinput="bindKeyInput" bindreset="formReset" style="width:300rpx" type="{{passwordType}}" maxlength="12" placeholder=""   value="{{owner.printerpsd}}" password='{{isShowPassword}}' name="printerpsd" disabled="{{waitEdit}}" 
+          />  -->
+      <input bindinput="bindKeyInput"  style="width:300rpx,height:30rpx" type="{{show}}" maxlength="12"  placeholder="" value="{{owner.printerpsd}}" password='{{isShowPassword}}' name="printerpsd" disabled="{{waitEdit}}"  />
+           <view  bindtap='toggleShowPassword'>
+        <image class='showImg' src='/imgs/printer/no_show.png' wx:if='{{isShowPassword}}'/>
+        <image class='showImg' src='/imgs/printer/show2.png' wx:if='{{!isShowPassword}}'/>
+         </view>
+          <!-- <input bindinput="getPassWord" bindreset="formReset" style="width:300rpx" type="{{show}}" maxlength="12"  placeholder=""    value="{{owner.printerpsd}}" name="printerpsd" disabled="{{waitEdit}}"  /> -->
+           <!-- <image class='showImg' bindtap='showPassword' src="{{isShow ? '/imgs/printer/no_show.png' : '/imgs/printer/show2.png'}}"></image> -->
+     </view>
+         <!-- <view catchtap="testTap" class="look_pwd incursor"  style="background-image: url({{BackgroundImg}})"> </view> -->
+        
+
+       
+
+      </view>
+      <view class="btn-area flex-row space-around {{waitEdit==false?'show':'hide'}}">
+        <button  formType="submit" type="primary" class="submit-button">提交修改</button>
+      </view>
+     <view class="btn-area flex-row space-around {{waitEdit==false?'show':'hide'}}"> 
+        <button formType="reset" bindtap="deletePrinter" type="primary" class="delete-button">删除         </button>
+      </view>
+       
+      <view class=" flex-row space-around {{waitEdit==false?'hide':'show'}}">{{attention}}</view>
+
+      <view >{{Test}}</view>
+ 
+   </form>
+  </scroll-view>
+</view>
+
+
